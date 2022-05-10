@@ -1,0 +1,62 @@
+﻿@model IEnumerable<AirlineSeatBookingApp.Models.PassengerModel>
+
+@{
+    ViewData["Title"] = "Passenger Booking List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Booking Seat List</h1>
+
+@using (Html.BeginForm("Add", "Home", FormMethod.Post))
+{
+    
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                
+            </th>
+            <th>
+                Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            var count = 0;
+        }
+@foreach (var item in Model)
+{
+    
+        <tr>
+            <td>
+                Passenger @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id= item.Id, name = item.Name /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    count++;
+
+}
+    @{count++;}
+
+        <tr>
+            <td>
+                Passenger @count
+            </td>
+            <td>
+                <input type="text" id="Name" name="Name"/>
+            </td>
+            <td>
+                <input class="btn btn-primary" type="submit" value="Add"/>
+            </td>
+        </tr>
+    </tbody>
+</table>
+}
